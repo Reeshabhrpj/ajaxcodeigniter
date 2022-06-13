@@ -96,25 +96,26 @@
 	<div id="editUserModal">
 <div style="padding-bottom:5px;">
 <h1>User Data</h1>
+<div id="success"></div>
 </div>
 	Id: <br>
-	<input type="hidden" name="id" value="<?php echo $id; ?>">
-	<input type="number" name="id" value="<?php echo $id; ?>">
+	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+	<input type="number" name="id"  id="id" value="<?php echo $id; ?>">
 	<br><br>
 	Name: <br>
-	<input type="text" name="name" value="<?php echo $name; ?>">
+	<input type="text" name="name" id="name" value="<?php echo $name; ?>">
 	<br><br>
 	Email :<br>
-	<input type="text" name="email" value="<?php echo $email; ?>">
+	<input type="text" name="email" id="email" value="<?php echo $email; ?>">
 	<br><br>
 	Contact:<br>
-	<input type="text" name="contact" value="<?php echo $contact; ?>">
+	<input type="text" name="contact" id="contact" value="<?php echo $contact; ?>">
 	<br><br>
 	message:<br>
-	<input type="text" name="message" value="<?php echo $message; ?>">
+	<input type="text" name="message" id="message" value="<?php echo $message; ?>">
 	<br><br>
 
-	<input type="button" value="update" onclick="updaterecord()" name="update"><br><br>
+	<input type="button" value="update" id="update" onclick="updaterecord()" name="update"><br><br>
 
 </div>
 </form>
@@ -122,26 +123,26 @@
 <script>
 function updaterecord(){
     var id = $('#id').val();
-    var Name = $('#name').val();
+	// alert(id);
+    var name = $('#name').val();
+	// alert(name);
     var email = $('#email').val();
+	// alert(email);
     var contact = $('#contact').val();
-    var message = $('#message').val();			
+	// alert(contact);
+    var message = $('#message').val();
+	//  alert(message);			
    
     $.ajax({
         type : "POST",
-        url  : "<?php echo base_url() ?>Signupform/updatedata",
+        url  : "<?php echo base_url() ?>Signupform/updateuser/",
         dataType : "JSON",
-        data : {id:id, name:Name, email:email, contact:contact,  message: message},
+        data : {id:id, name:name, email:email, contact:contact,  message: message},
         success: function(data){
-            $("#id").val("");
-            $('#name').val("");
-            $('#email').val("");
-            $('#contact').val("");
-            $('#message').val("");
-            $('#editUserModal').modal('hide');
-			console.log(data);
-            listUser();
-        }
+			$('#success').html("Data updated successfully");
+		
+			}
+        
     });
     return false;
 }

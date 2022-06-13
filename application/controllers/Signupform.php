@@ -35,7 +35,7 @@ class Signupform extends CI_Controller {
 
 	function register()
 	 		{
-
+				$id = $this->input->post('id');
 				$name = $this->input->post('name'); 
 				$email = $this->input->post('email'); 
 				$contact = $this->input->post('contact');
@@ -53,7 +53,8 @@ class Signupform extends CI_Controller {
 				// $this->db->insert('signupform',$data);
 				$id=$this->input->get('id');
 				$response['data'] =$this->Usermodel->insertuser($data);
-				echo json_encode($data);
+				echo "1";
+				// echo json_encode($data);
 				redirect("signupform/userlisting");
 				//  redirect(base_url().'signupform/userlisting');
 
@@ -75,10 +76,6 @@ class Signupform extends CI_Controller {
 				$result['data']=$this->Usermodel->updaterecords($id);
 				$this->load->view('editdata',$result);
 
-				// echo json_encode($result);
-				// exit;
-				// $this->load->view('editdata',$result);
-				
 				$id= $this->input->post('id');
 				   if($this->input->post('update')){
 				$data = array(
@@ -87,40 +84,43 @@ class Signupform extends CI_Controller {
 				'contact' => $this->input->post('contact'),
 				'message' => $this->input->post('message')
 				);
-			//    $response = $this->Usermodel->update_records($id,$data);
-			//    echo json_encode($response);
 				$this->Usermodel->update_records($id,$data);
-				//echo json_encode($result);
-				//  redirect(base_url().'signupform/userlisting');
+				echo json_encode('updated successfully');
+				redirect(base_url().'signupform/userlisting');
 				}
-					// $this->load->view('editdata',$result);
-				
 			}
 
 			public function updateuser(){
-				$id= $this->input->post('id');
-				if($this->input->post('update')){
-				$data = array(
-					'name' => $this->input->post('name'),
-					'email' => $this->input->post('email'),
-					'contact' => $this->input->post('contact'),
-					'message' => $this->input->post('message')
-				);
-				 print_r($data);
-				 exit;
-				$this->Usermodel->update_records($id,$data);
-			}
-					
-		}
+				// print_r($_POST);
+				//  exit;
+				 $id = $this->input->post('id');
+				 $name = $this->input->post('name'); 
+				 $email = $this->input->post('email'); 
+				 $contact = $this->input->post('contact');
+				 $message = $this->input->post('message'); 
+			 
+ 
+				 $data = array(
+						 'name' => $name,
+						 'email' => $email,
+						 'contact' => $contact,
+						 'message' => $message
+						 );
+						 
+				 $id=$this->input->post('id');
+				 $this->Usermodel->update_records($id, $data);
+				 echo "1";
+
+				}
 		
-				public function deletedata()
+			public function deletedata()
 				{
 					$id=$this->input->get('id');
 					$result['data']=$this->Usermodel->deleterecords($id);
 				    $this->load->view('deletedata',$result);
 					
 					$id= $this->input->post('id');
-						if($this->input->post('delete')){
+					if($this->input->post('delete')){
 					$data = array(
 					'name' => $this->input->post('name'),
 					'email' => $this->input->post('email'),
@@ -128,12 +128,31 @@ class Signupform extends CI_Controller {
 					'message' => $this->input->post('message')
 					);
 					$this->Usermodel->delete_records($id,$data);
-					echo json_encode($data);
+					// echo json_encode('deleted successfully');
 					redirect(base_url().'signupform/userlisting');
+				}	
 				}
-					
-				}
+
+				public function deleteuser(){
+					// print_r($_POST);
+					//  exit;
+					 $id = $this->input->post('id');
+					 $name = $this->input->post('name'); 
+					 $email = $this->input->post('email'); 
+					 $contact = $this->input->post('contact');
+					 $message = $this->input->post('message'); 
+					 $data = array(
+							 'name' => $name,
+							 'email' => $email,
+							 'contact' => $contact,
+							 'message' => $message
+							 );	 
+					 $id=$this->input->post('id');
+					 $this->Usermodel->delete_records($id, $data);
+					 echo "1";
+					}
+
 						
 }
 
-	
+		

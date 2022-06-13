@@ -95,47 +95,58 @@
 	<div id="deleteUserModal">
 <div style="padding-bottom:5px;">
 <h1>User Data</h1>
+<div id="success"></div>
 </div>
 	Id: <br>
-	<input type="hidden" name="id" value="<?php echo $id; ?>">
-	<input type="number" name="id" value="<?php echo $id; ?>">
+	<input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+	<input type="number" name="id" id="id" value="<?php echo $id; ?>">
 	<br><br>
 	Name: <br>
-	<input type="text" name="name" value="<?php echo $name; ?>">
+	<input type="text" name="name" id="name" value="<?php echo $name; ?>">
 	<br><br>
 	Email :<br>
-	<input type="text" name="email" value="<?php echo $email; ?>">
+	<input type="text" name="email" id="email" value="<?php echo $email; ?>">
 	<br><br>
 	Contact:<br>
-	<input type="text" name="contact" value="<?php echo $contact; ?>">
+	<input type="text" name="contact" id="contact" value="<?php echo $contact; ?>">
 	<br><br>
 	message:<br>
-	<input type="text" name="message" value="<?php echo $message; ?>">
+	<input type="text" name="message" id="message" value="<?php echo $message; ?>">
 	<br><br>
 
-	<input type="submit" value="delete" name="delete"><br><br>
+	<input type="button" value="delete" id="delete" name="delete" onclick="deleterecord()"><br><br>
 </div>
 
 </form>
 
 
 <script>
-	$('#deleteUserForm').on('delete',function(){
-    var id = $('#deleteid').val();
+	function deleterecord(){
+	
+	var id = $('#id').val();
+	// alert(id);
+    var name = $('#name').val();
+	// alert(name);
+    var email = $('#email').val();
+	// alert(email);
+    var contact = $('#contact').val();
+	// alert(contact);
+    var message = $('#message').val();
+	//  alert(message);			
+   
     $.ajax({
         type : "POST",
-        url  : "<?php echo base_url() ?>Signupform/deletedata",
-        dataType : "JSON",  
-        data : {id:id},
+        url  : "<?php echo base_url() ?>Signupform/deleteuser/",
+        dataType : "JSON",
+        data : {id:id, name:name, email:email, contact:contact,  message: message},
         success: function(data){
-            $("#"+id).remove();
-            $('#deleteid').val("");
-            $('#deleteUserModal').modal('hide');
-            listUser();
-        }
+			$('#success').html("Data deleted successfully");
+		
+			}
+        
     });
     return false;
-});
+}
 	</script>
 </body>
 </html>

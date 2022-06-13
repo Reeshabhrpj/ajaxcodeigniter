@@ -90,7 +90,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<h1>SignUp Form</h1>
 
+	
+
 	<div id="body">
+	<div id="success"></div>
 		<form action="<?php echo base_url().'signupform/register' ?>" method="post" id="addUserForm">
 		<div id="addUserModal">
 			<label for="id">ID</label><br>
@@ -106,17 +109,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<input type="contact" id="contact" name="contact" placeholder="Contact"><br><br>
 
 			<label for="field1">Your Message</label><br>
-			<textarea name="message" id="field1" cols="21" rows="5" placeholder="Message"></textarea><br><br>
+			<textarea name="message" id="message" cols="21" rows="5" placeholder="Message"></textarea><br><br>
 
-			<input type="submit" value="Submit" name="submit"><br><br>
+			<input type="button" value="Submit" name="submit" onclick="addrecord()"><br><br>
 			</div>
 		</form>	
 
 	</div>
 </div>
 	<script>
-	$('#adduserForm').submit('submit',function(){
-		var Name = $('#name').val();
+		function addrecord(){
+		var id = $('#id').val();
+		var name = $('#name').val();
 		var email = $('#email').val();
 		var contact = $('#contact').val();
 		var message = $('#message').val();
@@ -125,18 +129,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			type : "POST",
 			url  : "<?php echo base_url() ?>signupform/register",
 			dataType : "JSON",
-			data : {name:Name, email:email, contact:contact,  message: message},
+			data : {id:id, name:name, email:email, contact:contact,  message: message},
 			success: function(data){
-				$('#name').val("");
-				$('#email').val("");
-				$('#contact').val("");
-				$('#message').val("");
-				$('#addUserModal').modal('hide');
-				listUser();
+				$('#success').text("Data added successfully");
+				// $('#id').val("");
+				// $('#name').val("");
+				// $('#email').val("");
+				// $('#contact').val("");
+				// $('#message').val("");
+				// // $('#addUserModal').modal('hide');
+				// // listUser();
+				
 			}
 		});
 		return false;
-	});
+	}
 	</script>
 </body>
 </html>

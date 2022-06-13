@@ -127,7 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
-<script>
+<!-- <script>
 function listUser(){
 	$.ajax({
 		type  : 'ajax',
@@ -144,8 +144,8 @@ function listUser(){
 						'<td>'+data[i].contact+'</td>'+		                        
 						'<td>'+data[i].message+'</td>'+
 						'<td style="text-align:right;">'+
-							'<a href="javascript:void(0);" class="editRecord" data-id="'+data[i].id+'" data-name="'+data[i].name+'" data-email="'+data[i].email+'" data-contact="'+data[i].contact+'" data-message="'+data[i].message+'">Edit</a>'+' '+
-							'<a href="javascript:void(0);" class="deleteRecord" data-id="'+data[i].id+'">Delete</a>'+
+							'<a href="javascript:void(0);" class="updatedata" data-id="'+data[i].id+'" data-name="'+data[i].name+'" data-email="'+data[i].email+'" data-contact="'+data[i].contact+'" data-message="'+data[i].message+'">Edit</a>'+' '+
+							'<a href="javascript:void(0);" class="deletedata" data-id="'+data[i].id+'">Delete</a>'+
 						'</td>'+
 						'</tr>'; 
 			}
@@ -153,6 +153,6 @@ function listUser(){
 		}
 	});
 }
-</script>
+</script> -->
 </body>
 </html>
