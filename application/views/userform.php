@@ -118,6 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 	<script>
+		
 		function addrecord(){
 		var id = $('#id').val();
 		var name = $('#name').val();
@@ -132,18 +133,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			data : {id:id, name:name, email:email, contact:contact,  message: message},
 			success: function(data){
 				$('#success').text("Data added successfully");
-				// $('#id').val("");
-				// $('#name').val("");
-				// $('#email').val("");
-				// $('#contact').val("");
-				// $('#message').val("");
-				// // $('#addUserModal').modal('hide');
-				// // listUser();
 				
 			}
 		});
 		return false;
 	}
+	
 	</script>
 </body>
 </html>

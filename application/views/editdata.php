@@ -146,7 +146,6 @@ function updaterecord(){
     });
     return false;
 }
-
 	</script>
 </body>
 </html>

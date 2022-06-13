@@ -132,16 +132,17 @@
     var contact = $('#contact').val();
 	// alert(contact);
     var message = $('#message').val();
-	//  alert(message);			
+	//  alert(message);	
+			
    
     $.ajax({
+		
         type : "POST",
         url  : "<?php echo base_url() ?>Signupform/deleteuser/",
         dataType : "JSON",
         data : {id:id, name:name, email:email, contact:contact,  message: message},
         success: function(data){
 			$('#success').html("Data deleted successfully");
-		
 			}
         
     });

@@ -93,32 +93,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<table>  
         <thead>  
-            <th>ID</th>  
-            <th>NAME</th>  
-            <th>EMAIL ID</th>  
-            <th>CONTACT</th>  
-            <th>MESSAGE</th> 
-			<th>ACTION</th> 
-			<th>DELETE</th>
+            <th scope="col">ID</th>  
+            <th scope="col">NAME</th>  
+            <th scope="col">EMAIL ID</th>  
+            <th scope="col">CONTACT</th>  
+            <th scope="col">MESSAGE</th> 
+			<th scope="col">ACTION</th> 
+			<th scope="col">DELETE</th>
             
         </thead>  
         <tbody id="listRecords">  
 
-
             <?php  
-                foreach($getUserList as $row)  
-                {  
-                    echo "<tr>  
-                                <td>$row->id</td>  
-                                <td>$row->name</td>  
-                                <td>$row->email</td>  
-                                <td>$row->contact</td>  
-                                <td>$row->message</td>  
-								<td><a href='updatedata?id=".$row->id."'>Update</a></td>
-								<td><a href='deletedata?id=".$row->id."'>Delete</a></td>;
 
-                   		  </tr>";  
-                }  
+				foreach($getUserList as $row)
+				{
+					echo "<tr>
+						      <td>$row->id</td>  
+			                  <td>$row->name</td>  
+			                  <td>$row->email</td>  
+			                  <td>$row->contact</td>  
+			                  <td>$row->message</td>  
+							</tr>";
+							?>	
+						 <td>
+								<button type="button" class="editbtn" onclick="updaterecord()">UPDATE</button>
+							 </td>
+							<td>
+								<button type="button" class="deletebtn" onclick="deleterecord()">DELETE</button>
+							</td>
+					<?php           
+				}
+
+
+?>
+
+
+
+			<?php
+                // foreach($getUserList as $row)  
+                // {  
+                //     echo "<tr>  
+                //             <td>$row->id</td>  
+			//                 <td>$row->name</td>  
+			//                 <td>$row->email</td>  
+			//                 <td>$row->contact</td>  
+			//                 <td>$row->message</td>  
+			// 					<td><a href='updatedata?id=".$row->id."'>Update</a></td>
+				// 				<td><a href=''>Delete</a></td>;
+                //    		  </tr>";  
+                // }  
             ?>  
         </tbody>  
     </table>  
@@ -127,32 +151,159 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
-<!-- <script>
-function listUser(){
-	$.ajax({
-		type  : 'ajax',
-		url   : '<?php echo base_url() ?>Signupform/userlisting',
-		async : false,
-		dataType : 'json',
-		success : function(data){
-			var html = '';
-			var i;
-			for(i=0; i<data.length; i++){
-				html += '<tr id="'+data[i].id+'">'+
-						'<td>'+data[i].name+'</td>'+
-						'<td>'+data[i].email+'</td>'+
-						'<td>'+data[i].contact+'</td>'+		                        
-						'<td>'+data[i].message+'</td>'+
-						'<td style="text-align:right;">'+
-							'<a href="javascript:void(0);" class="updatedata" data-id="'+data[i].id+'" data-name="'+data[i].name+'" data-email="'+data[i].email+'" data-contact="'+data[i].contact+'" data-message="'+data[i].message+'">Edit</a>'+' '+
-							'<a href="javascript:void(0);" class="deletedata" data-id="'+data[i].id+'">Delete</a>'+
-						'</td>'+
-						'</tr>'; 
-			}
-			$('#listRecords').html(html);					
-		}
-	});
+
+<script>
+	function deleterecord(id){
+	
+	// var id = $('#id').val();
+	// alert(id);
+    // var name = $('#name').val();
+	// alert(name);
+    // var email = $('#email').val();
+	// alert(email);
+    // var contact = $('#contact').val();
+	// alert(contact);
+    // var message = $('#message').val();
+	//  alert(message);	
+			
+   
+    if (confirm('Are You Sure Want Delete Record??')==true){
+   
+   $.ajax({
+
+	   type : "POST",
+	   url  : "<?php echo base_url() ?>Signupform/deletedata/",
+	   dataType : "JSON",
+	   data : {id:id},
+	   success: function(data){
+		   $('#success').html("Data Deleted successfully");
+		   alert("Data deleted Successfully");
+   }   
+});
 }
-</script> -->
+
+else{
+    alert("data not deleted");
+}
+	}
+	</script>
+
+
+
+<script>
+function updaterecord(){
+    var id = $('#id').val();
+	// alert(id);
+    var name = $('#name').val();
+	// alert(name);
+    var email = $('#email').val();
+	// alert(email);
+    var contact = $('#contact').val();
+	// alert(contact);
+    var message = $('#message').val();
+	//  alert(message);			
+   
+    $.ajax({
+        type : "POST",
+        url  : "<?php echo base_url() ?>Signupform/updatedata/",
+        dataType : "JSON",
+        data : {id:id, name:name, email:email, contact:contact,  message: message},
+        success: function(data){
+			$('#success').html("Data updated successfully");
+		
+			}
+        
+    });
+    return false;
+}
+
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<script>
+
+$('a').click(function(e,id) {
+    e.preventDefault();   
+	// var id = $('#id').val();
+	// alert($id);
+    // var name = $('#name').val();
+	// alert(name);
+    // var email = $('#email').val();
+	// alert(email);
+    // var contact = $('#contact').val();
+	// alert(contact);
+    // var message = $('#message').val();
+	//  alert(message);			
+    if (confirm('Are You Sure Want Delete Record??')==true){
+   
+		$.ajax({
+
+			type : "POST",
+			url  : "<?php echo base_url() ?>Signupform/deleteuser/",
+			dataType : "JSON",
+			data : {id:id},
+			success: function(data){
+				$('#success').html("Data Deleted successfully");
+				alert("Data deleted Successfully");
+		}   
+	});
+}
+  
+	else{
+		// alert("data not deleted");
+	}
+});
+
+
+	</script> -->
+
+ <!-- <script>
+// function listUser(){
+// 	$.ajax({
+// 		type  : 'ajax',
+// 		url   : '<?php echo base_url() ?>Signupform/userlisting',
+// 		async : false,
+// 		dataType : 'json',
+// 		success : function(data){
+// 			var html = '';
+// 			var i;
+// 			for(i=0; i<data.length; i++){
+// 				html += '<tr id="'+data[i].id+'">'+
+// 						'<td>'+data[i].name+'</td>'+
+// 						'<td>'+data[i].email+'</td>'+
+// 						'<td>'+data[i].contact+'</td>'+		                        
+// 						'<td>'+data[i].message+'</td>'+
+// 						'<td style="text-align:right;">'+
+// 							'<a href="javascript:void(0);" class="updatedata" data-id="'+data[i].id+'" data-name="'+data[i].name+'" data-email="'+data[i].email+'" data-contact="'+data[i].contact+'" data-message="'+data[i].message+'">Edit</a>'+' '+
+// 							'<a href="javascript:void(0);" class="deletedata" data-id="'+data[i].id+'">Delete</a>'+
+// 						'</td>'+
+// 						'</tr>'; 
+// 			}
+// 			$('#listRecords').html(html);					
+// 		}
+// 	});
+// }
+// </script> -->

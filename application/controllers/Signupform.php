@@ -61,6 +61,7 @@ class Signupform extends CI_Controller {
 			}
 			function userlisting()
 			{	
+				 $id=$this->input->get('id');
 				 $users=$this->Usermodel->fetchdata();
 				 $data['getUserList'] = $users;
 				 $this->load->view('userinfo', $data);
@@ -85,12 +86,11 @@ class Signupform extends CI_Controller {
 				'message' => $this->input->post('message')
 				);
 				$this->Usermodel->update_records($id,$data);
-				echo json_encode('updated successfully');
-				redirect(base_url().'signupform/userlisting');
-				}
+				
 			}
+		}
 
-			public function updateuser(){
+			 function updateuser(){
 				// print_r($_POST);
 				//  exit;
 				 $id = $this->input->post('id');
@@ -135,7 +135,7 @@ class Signupform extends CI_Controller {
 
 				public function deleteuser(){
 					// print_r($_POST);
-					//  exit;
+					// exit;
 					 $id = $this->input->post('id');
 					 $name = $this->input->post('name'); 
 					 $email = $this->input->post('email'); 
@@ -152,7 +152,6 @@ class Signupform extends CI_Controller {
 					 echo "1";
 					}
 
-						
 }
 
 		
